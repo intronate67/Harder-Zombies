@@ -1,4 +1,4 @@
-main: net.huntersharpe.hz.HarderZombies
+main: main.java.net.huntersharpe.hz.HarderZombies
 name: HarderZombies
 version: 0.4
 author: Hunter Sharpe
