@@ -16,7 +16,13 @@ import java.util.Map;
  */
 public class ZombieListener implements Listener {
 
-    private Map<String, Integer> zombieKillers = new HashMap<String, Integer>();
+    private static ZombieListener instance;
+
+    public ZombieListener getInstance(){
+        return instance;
+    }
+
+    public Map<String, Integer> zombieKillers = new HashMap<String, Integer>();
 
     public void onEntityDamage(EntityDamageByEntityEvent e){
 
