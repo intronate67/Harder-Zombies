@@ -1,4 +1,4 @@
 name: Harder Zombies
-main: java.net.huntersharpe.dev.harder_zombies.HarderZombies
+main: net.huntersharpe.dev.harder_zombies.HarderZombies
 author: Hunter Sharpe
 version: 0.2
