@@ -1,6 +1,7 @@
 package main.java.net.huntersharpe.hz;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
@@ -11,6 +12,7 @@ public class DeathListener implements Listener{
 
     private static ZombieListener zombie = ZombieListener.getInstance();
 
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e){
         Player p = (Player) e.getEntity();
         if(!zombie.zombieKillers.containsValue(p.getName())) return;
@@ -20,6 +22,8 @@ public class DeathListener implements Listener{
                     0
             );
             zombie.zombieKillers.remove(p.getName());
+            //Testing Purposes
+            p.sendMessage("Removed from zombie target arraylist.");
         }
     }
 

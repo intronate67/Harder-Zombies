@@ -1,12 +1,15 @@
 package main.java.net.huntersharpe.hz;
 
-
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,40 +25,65 @@ public class ZombieListener implements Listener {
         return instance;
     }
 
-    public Map<String, Integer> zombieKillers = new HashMap<String, Integer>();
+    public Map<String, Integer> zombieKillers = new HashMap<>();
 
-    public void onEntityDamage(EntityDamageByEntityEvent e){
+    @EventHandler
+    public void onEntityDamage(EntityDeathEvent e){
 
-        if(!e.getEntityType().equals(EntityType.ZOMBIE)) return;
-        if(!e.getDamager().equals(EntityType.PLAYER)) return;
-
-        Player p = (Player) e.getDamager();
-        Location loc = new Location(p.getWorld(),
-                p.getLocation().getX() + 35,
-                p.getLocation().getY() + 100,
-                p.getLocation().getZ()
-        );
-
-        if(!zombieKillers.containsKey(p.getName())){
-            zombieKillers.put(p.getName(), 2);
-
-            Zombie z1 = (Zombie)p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
-            Zombie z2 = (Zombie)p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
-            z1.setHealth(60);
-            z2.setHealth(60);
-            z1.setTarget(p);
-            z2.setTarget(p);
-        }else if(zombieKillers.get(p.getName()) >= 10){
+        //if(!e.getEntityType().equals(EntityType.ZOMBIE)) return;
+        //below method is for above.
+        if(!e.getEntityType().equals(EntityType.ZOMBIE)){
+            Bukkit.broadcastMessage("Entity Was not zombie.");
             return;
-        }else{
-            zombieKillers.put(p.getName(), zombieKillers.get(p.getName()) + 2);
-            Zombie z1 = (Zombie)p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
-            Zombie z2 = (Zombie)p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
-            z1.setHealth(60);
-            z2.setHealth(60);
-            z1.setTarget(p);
-            z2.setTarget(p);
         }
+        //if(!e.getDamager().equals(EntityType.PLAYER)) return;
+        //below method is for above
+        if(e.getEntity().getKiller() instanceof Player){
+            Player p = (Player) e.getEntity().getKiller();
+            Location loc = new Location(p.getWorld(),
+                    p.getLocation().getX() + 35,
+                    p.getLocation().getY() + 100,
+                    p.getLocation().getZ()
+            );
+
+            if(!zombieKillers.containsKey(p.getName())){
+                zombieKillers.put(p.getName(), 2);
+
+                Zombie z1 = (Zombie)p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+                Zombie z2 = (Zombie)p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+                //Testing
+                p.sendMessage("First two Zombies Spawned");
+                //Finished test message
+                z1.setLastDamage(0);
+                z2.setLastDamage(0);
+                //Test message
+                p.sendMessage("ZombieHealthSet");
+                //Finished Test message
+                z1.setTarget(p);
+                z2.setTarget(p);
+                //Testing
+                p.sendMessage("Zombie targets set!");
+                //finished testing
+
+            }else if(zombieKillers.get(p.getName()) >= 10){
+                return;
+            }else {
+                zombieKillers.put(p.getName(), zombieKillers.get(p.getName()) + 2);
+                Zombie z1 = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+                Zombie z2 = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+                //Testing
+                p.sendMessage(zombieKillers.get(p.getName()) + " zombies have been spawned");
+                //finished
+                z1.setLastDamage(0);
+                z2.setLastDamage(0);
+                z1.setTarget(p);
+                z2.setTarget(p);
+            }
+        }else{
+            Bukkit.broadcastMessage("Killer was not player");
+            return;
+        }
+
 
     }
 
