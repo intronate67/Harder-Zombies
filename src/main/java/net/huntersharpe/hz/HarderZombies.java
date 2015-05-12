@@ -12,6 +12,7 @@ public class HarderZombies extends JavaPlugin {
     public void onEnable() {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new ZombieListener(), this);
+        pm.registerEvents(new DeathListener(), this);
     }
 
     public void onDisable() {

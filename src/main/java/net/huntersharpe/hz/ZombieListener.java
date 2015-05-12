@@ -18,7 +18,7 @@ public class ZombieListener implements Listener {
 
     private static ZombieListener instance;
 
-    public ZombieListener getInstance(){
+    public static ZombieListener getInstance(){
         return instance;
     }
 
