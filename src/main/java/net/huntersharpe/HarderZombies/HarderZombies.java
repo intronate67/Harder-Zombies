@@ -1,4 +1,4 @@
-package main.java.net.huntersharpe.dev.HarderZombies;
+package main.java.net.huntersharpe.HarderZombies;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
