@@ -1,4 +1,5 @@
-name: HarderZombies
 main: net.huntersharpe.hz.HarderZombies
+name: HarderZombies
 version: 0.4
 author: Hunter Sharpe
+description: Attract more zombies onto a player.
