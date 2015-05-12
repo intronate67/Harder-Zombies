@@ -1,4 +1,4 @@
-name: Harder Zombies
-main: net.huntersharpe.HarderZombies.HarderZombies
+name: HarderZombies
+main: net.huntersharpe.hz.HarderZombies
+version: 0.4
 author: Hunter Sharpe
-version: 0.2

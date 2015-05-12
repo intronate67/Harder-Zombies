@@ -1,4 +1,4 @@
-package main.java.net.huntersharpe.HarderZombies;
+package main.java.net.huntersharpe.hz;
 
 
 import org.bukkit.Location;
