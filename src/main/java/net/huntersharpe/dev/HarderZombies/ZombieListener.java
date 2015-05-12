@@ -1,4 +1,4 @@
-package main.java.net.huntersharpe.dev.harder_zombies;
+package main.java.net.huntersharpe.dev.HarderZombies;
 
 
 import org.bukkit.Location;
