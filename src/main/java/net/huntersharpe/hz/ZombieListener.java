@@ -43,15 +43,9 @@ public class ZombieListener implements Listener {
             double y = p.getLocation().getY() + 100;
             Location loc = new Location(p.getWorld(),
                     p.getLocation().getX() + 35,
-                    p.getLocation().getY() + 100,
+                    p.getWorld().getHighestBlockYAt((int) p.getLocation().getX(), (int) p.getLocation().getZ()),
                     p.getLocation().getZ()
             );
-            do{
-                y--;
-            }while(loc.getBlock().isEmpty());
-
-            loc.setY(y);
-
             if(!zombieKillers.containsKey(p.getName())){
                 zombieKillers.put(p.getName(), 2);
 
