@@ -40,11 +40,16 @@ public class ZombieListener implements Listener {
         //below method is for above
         if(e.getEntity().getKiller() instanceof Player){
             Player p = (Player) e.getEntity().getKiller();
+            double y = p.getLocation().getY() + 100;
             Location loc = new Location(p.getWorld(),
                     p.getLocation().getX() + 35,
                     p.getLocation().getY() + 100,
                     p.getLocation().getZ()
             );
+            while(loc.getBlock().isEmpty()){
+                y--;
+            }
+            loc.setY(y);
 
             if(!zombieKillers.containsKey(p.getName())){
                 zombieKillers.put(p.getName(), 2);
@@ -54,8 +59,8 @@ public class ZombieListener implements Listener {
                 //Testing
                 p.sendMessage("First two Zombies Spawned");
                 //Finished test message
-                z1.setLastDamage(0);
-                z2.setLastDamage(0);
+                z1.setHealth(20);
+                z2.setHealth(20);
                 //Test message
                 p.sendMessage("ZombieHealthSet");
                 //Finished Test message
@@ -74,8 +79,8 @@ public class ZombieListener implements Listener {
                 //Testing
                 p.sendMessage(zombieKillers.get(p.getName()) + " zombies have been spawned");
                 //finished
-                z1.setLastDamage(0);
-                z2.setLastDamage(0);
+                z1.setHealth(20);
+                z2.setHealth(20);
                 z1.setTarget(p);
                 z2.setTarget(p);
             }
