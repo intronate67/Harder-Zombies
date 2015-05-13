@@ -15,8 +15,7 @@ public class DeathListener implements Listener{
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e){
         Player p = (Player) e.getEntity();
-        if(!zombie.zombieKillers.containsValue(p.getName())) return;
-        else{
+        if(zombie.zombieKillers.get(p.getName()) != null){
             zombie.zombieKillers.replace(p.getName(),
                     zombie.zombieKillers.get(p.getName()),
                     0
@@ -24,6 +23,9 @@ public class DeathListener implements Listener{
             zombie.zombieKillers.remove(p.getName());
             //Testing Purposes
             p.sendMessage("Removed from zombie target arraylist.");
+        }
+        else{
+           return;
         }
     }
 
